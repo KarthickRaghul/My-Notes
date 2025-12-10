@@ -1,10 +1,10 @@
-|Timing|Total Duration|
-|---|---|
-|T0 (paranoid)|9.8 hours|
-|T1 (sneaky)|27.53 minutes|
-|T2 (polite)|40.56 seconds|
-|T3 (normal)|0.15 seconds|
-|T4 (aggressive)|0.13 seconds|
+| Timing          | Total Duration |
+| --------------- | -------------- |
+| T0 (paranoid)   | 9.8 hours      |
+| T1 (sneaky)     | 27.53 minutes  |
+| T2 (polite)     | 40.56 seconds  |
+| T3 (normal)     | 0.15 seconds   |
+| T4 (aggressive) | 0.13 seconds   |
 
 |Option|Explanation|
 |---|---|
