@@ -5,6 +5,6 @@ This is my own maintenance of Write-ups .
 
 My HackTheBox Writeups  -
 
-My **Leetcode** WriteUps - [Readme](MyNotes/Leetcode/Readme.md) 
-To check my consistency - [[LeetCode Sheet]] 
-I wrote a custom Template script in Obsidian where it updates the problems as soon as I add it , To view it - [[Leetcode_problem]]
+My **Leetcode** WriteUps - [Readme](MyNotes/Leetcode/Readme.md)   
+To check my consistency - [[LeetCode Sheet]]  
+I wrote a custom Template script in Obsidian where it updates the problems as soon as I add it , To view it - [[Leetcode_problem]]  
