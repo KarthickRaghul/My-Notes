@@ -7,10 +7,10 @@ I am currently following this AlgoMaster-300 for practising my DSA and
 - [x] [[26. Remove Duplicates from Sorted Array]]
 - [x] [[121. Best Time to Buy and Sell Stock]]
 - [x] [[189. Rotate Array]]
-- [ ] Product of Array Except Self
-- [ ] Best Time to Buy and Sell Stock II
-- [ ] Number of Zero-Filled Subarrays
-- [ ] Increasing Triplet Subsequence
+- [x] [[238. Product of Array Except Self]]
+- [x] [[121. Best Time to Buy and Sell Stock]]
+- [x] [[3804. Number of Centered Subarrays]]
+- [x] [[334. Increasing Triplet Subsequence]]
 - [ ] First Missing Positive
 
 ---
