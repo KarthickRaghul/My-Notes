@@ -11,17 +11,17 @@ I am currently following this AlgoMaster-300 for practising my DSA and
 - [x] [121. Best Time to Buy and Sell Stock](121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock.md)
 - [x] [3804. Number of Centered Subarrays](3804.%20Number%20of%20Centered%20Subarrays.md)
 - [x] [334. Increasing Triplet Subsequence](334.%20Increasing%20Triplet%20Subsequence.md)
-- [ ] First Missing Positive
+- [x]  [41. First Missing Positive](41.%20First%20Missing%20Positive.md)
 
 ---
 
 ## Strings
 
-- [x] [[392. Is Subsequence]]
-- [x] [[125. Valid Palindrome]]
-- [ ] Longest Common Prefix]]
+- [x] [392. Is Subsequence](392.%20Is%20Subsequence.md)
+- [x] [125. Valid Palindrome](125.%20Valid%20Palindrome.md)
+- [x] [14. Longest Common Prefix](14.%20Longest%20Common%20Prefix.md)
 - [ ] Zigzag Conversion
-- [ ] Reverse Words in a String
+- [x] [151. Reverse Words in a String](151.%20Reverse%20Words%20in%20a%20String.md)
 - [ ] Guess the Word
 
 ---
