@@ -8,3 +8,4 @@ My HackTheBox Writeups  -
 My **Leetcode** WriteUps - [Readme](MyNotes/Leetcode/Readme.md)   
 To check my consistency - [LeetCode Sheet](LeetCode%20Sheet.md)    
 I wrote a custom Template script in Obsidian where it updates the problems as soon as I add it , To view it - [Leetcode_problem](Leetcode_problem.md)  
+Funtion overview -  [[Funtion Of Java to be remembered]]
