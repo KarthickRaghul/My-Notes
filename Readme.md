@@ -3,7 +3,7 @@ This is my own maintenance of Write-ups .
 >I just created this repository for the maintenance of my writeups so that I can document my entire learning journey . <br>
 >This Notes are ***Obsidian*** flavored Markdown
 
-My HackTheBox Writeups  -  [Readme](Writeups/HackTheBox/Readme.md)
+My HackTheBox Writeups  -  [Readme](/HackTheBox/Readme.md)
 
 My **Leetcode** WriteUps - [Readme](Writeups/Leetcode/Readme.md)]  
 To check my consistency - [LeetCode Sheet](LeetCode%20Sheet.md)  
