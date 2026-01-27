@@ -6,7 +6,7 @@
 
 > **My Experience**:
 >   
-> I got a score of 914 by learning through AWS SkillBuilder's **AWS Cloud Practitioner Essentials** , Took Notes , learned from them and finally took practice tests before writing the original exam. Practiced Strongly for two days before exam . My exam Had many Questions about **AWS CAF** (Which I felt a bit confusing 🫩) . Some of them were direct questions . Around 10-12 questions repeated from the mock test that I took . I never paid anything for the Practice exams and the test I provided below are also free .
+> I got a score of 914 by learning through AWS SkillBuilder's **AWS Cloud Practitioner Essentials** , Took Notes , learned from them and finally took practice tests before writing the original exam. Practiced Strongly for two days before exam .  Some of the questions were direct questions and some scenario based questions .My exam had questions about **AWS CAF** (Which I felt a bit confusing 🫩) . Around 10-12 questions repeated from the mock test that I took . I never paid anything for the Practice exams and the test I provided below are also free .
 
 ---
 ## My Personal Notes :
