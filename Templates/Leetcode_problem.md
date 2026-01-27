@@ -1,7 +1,7 @@
 <%*
 console.log("LeetCode auto-log running...");
 
-const sheetPath = "MyNotes/Leetcode/LeetCode Sheet.md";
+const sheetPath = "Writeups/Leetcode/LeetCode Sheet.md";
 new Notice("Updating: " + sheetPath);
 
 const today = tp.date.now("DD/MM/YYYY");
