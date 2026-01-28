@@ -2,7 +2,7 @@
 
 **AWS Cloud Adoption FrameworkCAF** to migrate to the AWS Cloud.
 
-> [!info] AWS Cloud Adoption Framework  
+> [!NOTE] AWS Cloud Adoption Framework  
 > The AWS Cloud Adoption Framework helps enterprises effectively adopt the AWS cloud  
 > [https://aws.amazon.com/cloud-adoption-framework/](https://aws.amazon.com/cloud-adoption-framework/)  
 
